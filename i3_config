@@ -1,0 +1,302 @@
+ 						#############################
+						# Kpodovzky I3 Config (v4) #
+						#############################
+
+#-----------------------------------------------------------------------#
+#------------------------------i3-Gaps----------------------------------#
+hide_edge_borders both
+for_window [class="^.*"] border pixel 1
+gaps inner 10
+gaps outer 10
+
+#--------------------------------BAR-------------------------------------#
+#bar {
+#        #status_command i3status
+#        status_command   ~/.config/i3/bumblebee-status/bumblebee-status -m pasink pasource battery  pacman disk 
+#datetime  -p disk.path=/home datetime.format="%a, %b %d, %Y at %I:%M %p" -t gruvbox-powerline
+#}
+#-----------------------?--POLYBAR-in-USED-?-----------------------------#
+
+
+#-------------------------------#
+# Setting Variables & Worspaces #
+#-------------------------------#
+set $mod 	Mod4
+set $term	termite
+#set $t		urxvt
+set $browser	qutebrowser
+set $mail 	icedove 
+set $ws1 	"1 "
+set $ws2 	"2 "
+set $ws3 	"3 "
+set $ws4 	"4 "
+set $ws5 	"5 "
+set $ws6 	"6 "
+set $ws7 	"7 "
+set $ws8 	"8 "
+set $ws9 	"9 "
+set $ws0 	"10 "
+set $music	termite -e ncmpcpp
+set $cal	termite -e calcurse
+set $calc	qalc
+set $poz 	--no-startup-id mpc toggle
+set $pause 	--no-startup-id mpc pause
+set $next 	--no-startup-id mpc next
+set $prev 	--no-startup-id mpc prev
+set $forw 	--no-startup-id mpc seek +90
+set $backw 	--no-startup-id mpc seek -90
+set $mute 	--no-startup-id amixer sset Master mute
+
+#----------------------------------------------------------------------------------------------------------------------------------------------#
+
+#-----------------------------------------------------------------------#
+#---------------FONT -- EXECS -- WINS -- BINDSYSTEMS--------------------#
+#-----------------------------------------------------------------------#
+
+font pango:mtx 9
+#---------------
+
+exec_always	i3 reload
+exec_always 	compton -f
+exec_always 	--no-startup-id 	~/.config/polybar/plaunch.sh
+#exec		--no-startup-id		compton
+exec 		--no-startup-id 	nm-applet
+exec 		--no-startup-id 	xcompmgr
+exec 		--no-startup-id 	$term   --name=scratchb -e tmux
+exec            --no-startup-id         $term   --name=calcu -e $calc
+#exec	 	--no-startup-id 	feh --bg-scale ~/.config/wall.jpg
+exec_always 	--no-startup-id 	wal -c -i -t  ~/.config/wall.jpg
+exec 		--no-startup-id 	exec 	synclient TouchpadOff=1
+exec 		--no-startup-id 	transmission-daemon
+exec 		--no-startup-id 	mpd
+exec 		--no-startup-id 	sudo mount -a
+#------------------------------------------------------------------------
+
+# Automatically put specific on specific ws
+assign 		[class="Termite"    ]	$ws1
+#assign		[class="URxvt"      ]	$ws2
+assign	 	[class="Audacity"   ] 	$ws4 
+assign	 	[class="Blender"    ] 	$ws6
+assign		[title="evince"     ] 	$ws8
+assign	 	[class="Icedove"    ] 	$ws9
+assign	 	[class="qutebrowser"] 	$ws0
+assign	 	[class="gimp"       ] 	$ws7
+
+for_window 	[instance="scratchb"] 	floating enable;
+for_window      [instance="calcu"   ]   floating enable;
+for_window      [instance="calcu"   ]   resize set 500 350
+for_window 	[instance="scratchb"] 	move scratchpad; [instance="scratchb"]	scratchpad show; move position center;resize shrink
+for_window	[instance="calcu"   ]   move scratchpad; [instance="calcu"]  scratchpad show; move position center;resize shrink
+for_window 	[title="Video"      ] 	move to workspace $ws5
+for_window      [window_role="gimp-dock"] floating disable; move left; resize shrink width 50 px or 50ppt
+for_window      [window_role="gimp-toolbox"] floating disable; move right; resize grow width 30 px or 30ppt
+
+workspace 	$ws6	gaps	inner	0
+workspace       $ws6    gaps    outer   0
+workspace       $ws7    gaps    inner   0
+workspace       $ws7    gaps    outer   0
+
+# Wal config:
+set_from_resource $fg i3wm.color7 #f0f0f0
+set_from_resource $bg i3wm.color2 #f0f0f0
+
+# class                 border  backgr. text indicator child_border
+client.focused          $bg     $bg     $fg  $bg       $bg
+client.focused_inactive $bg     $bg     $fg  $bg       $bg
+client.unfocused        $bg     $bg     $fg  $bg       $bg
+client.urgent           $bg     $bg     $fg  $bg       $bg
+client.placeholder      $bg     $bg     $fg  $bg       $bg
+
+client.background       $bg
+
+
+#------------------------------Digits----------------------------------#
+#    switch to workspace - move focused container to workspace         #
+bindsym 	$mod+1 			workspace $ws1
+bindsym 	$mod+Shift+1 		move container to workspace $ws1
+
+bindsym 	$mod+2 			workspace $ws2
+bindsym 	$mod+Shift+2 		move container to workspace $ws2
+
+bindsym 	$mod+3 			workspace $ws3
+bindsym 	$mod+Shift+3 		move container to workspace $ws3
+
+bindsym 	$mod+4 			workspace $ws4
+bindsym 	$mod+Shift+4 		move container to workspace $ws4
+
+bindsym 	$mod+5 			workspace $ws5
+bindsym 	$mod+Shift+5 		move container to workspace $ws5
+
+bindsym 	$mod+6 			workspace $ws6
+bindsym 	$mod+Shift+6 		move container to workspace $ws6
+
+bindsym 	$mod+7 			workspace $ws7
+bindsym 	$mod+Shift+7 		move container to workspace $ws7
+
+bindsym 	$mod+8 			workspace $ws8
+bindsym 	$mod+Shift+8 		move container to workspace $ws8
+
+bindsym 	$mod+9 			workspace $ws9
+bindsym 	$mod+Shift+9 		move container to workspace $ws9
+
+bindsym 	$mod+0 			workspace $ws0
+bindsym 	$mod+Shift+0 		move container to workspace $ws0
+
+
+#-----------------------------Letters---------------------------------------------#
+bindsym 	$mod+q			kill
+#bindsym 	$mod+Shift+q 
+
+bindsym 	$mod+w			exec --no-startup-id $browser; workspace $ws0 
+#bindsym 	$mod+Shift+w		exec $cal
+
+bindsym 	$mod+e			exec --no-startup-id $mail; workspace $ws9 
+bindsym 	$mod+Shift+e 		exec "i3-nagbar -t warning -m 'Really wanna exit i3?' -b 'Yeah, exit i3' 'i3-msg exit'"
+
+bindsym 	$mod+r 			exec $term -e ranger
+bindsym 	$mod+Shift+r 		restart
+
+bindsym 	$mod+t			split toggle
+bindsym 	$mod+Shift+t		gaps inner all set 15; gaps outer all set 15
+
+bindsym 	$mod+y			resize grow height 10 px or 10ppt
+bindsym 	$mod+Shift+y		resize shrink height 10 px or 10 ppt
+
+bindsym 	$mod+x			resize grow width 10 px or 10ppt
+bindsym 	$mod+Shift+x		resize shrink width 10 px or 10 ppt
+
+bindsym 	$mod+u			gaps inner current plus 5
+bindsym 	$mod+Shift+u		gaps inner current minus 5
+
+#bindsym 	$mod+i 			
+bindsym 	$mod+Shift+i		exec --no-startup-id $term -e htop 
+
+bindsym 	$mod+o			exec --no-startup-id openshot-qt 
+#bindsym 	$mod+Shift+o			
+
+bindsym 	$mod+p			exec --no-startup-id evince; workspace $ws8  	
+bindsym 	$mod+Shift+p		exec --no-startup-id pidgin ; workspace $ws9	
+
+bindsym 	$mod+a			exec audacity; workspace $ws4
+#bindsym 	$mod+Shift+a			
+
+bindsym 	$mod+s			[instance="scratchb"] scratchpad show	
+bindsym 	$mod+Shift+s		[instance="calcu"   ] scratchpad show			
+
+bindsym 	$mod+d			exec rofi -show run 	
+bindsym 	$mod+Shift+d		gaps inner all set 0; gaps outer all set 0	
+
+bindsym 	$mod+f 			fullscreen toggle		
+#bindsym 	$mod+Shift+f			
+
+bindsym 	$mod+g			exec --no-startup-id gimp; workspace $ws7
+bindsym 	$mod+Shift+g		exec $term -e gtypist;workspace $ws2	
+
+bindsym 	$mod+h 			focus left
+bindsym 	$mod+Shift+h		move left 30
+
+bindsym 	$mod+j 			focus down
+bindsym 	$mod+Shift+j		move down 30
+
+bindsym 	$mod+k 			focus up
+bindsym 	$mod+Shift+k		move up 30
+
+bindsym 	$mod+l 			focus right
+bindsym 	$mod+Shift+l		move right 30
+
+bindsym 	$mod+z			exec ~/.config/i3/lock.sh	
+bindsym 	$mod+Shift+z		exec $poz; exec $mute; workspace z ;exec $term -e zz; exec $term -e htop;split horizontal; exec $term -e gnutls-serv  	
+
+bindsym 	$mod+c			exec $term -e cmus; workspace $ws5	
+bindsym 	$mod+Shift+c		exec $music; workspace $ws5	
+
+bindsym 	$mod+v			split vertical; exec $term; workspace $ws1		
+bindsym 	$mod+Shift+v		split horizontal; exec $term; workspace $ws1	
+
+bindsym 	$mod+b			exec --no-startup-id blender; workspace $ws6	
+#bindsym 	$mod+Shift+b			
+
+bindsym 	$mod+n			exec $term -e vis; workspace $ws2	
+bindsym 	$mod+Shift+n		reload	
+
+bindsym 	$mod+m			exec --no-startup-id vlc; workspace $ws5	
+bindsym 	$mod+Shift+m		exec --no-startup-id unclutter #(Makes the mouse invisible after a brief period)
+
+bindsym		$mod+BackSpace		exec shutdown now
+bindsym 	$mod+Shift+BackSpace	exec reboot
+
+bindsym 	$mod+Escape		exec --no-startup-id xset -display :0.0 dpms force off
+#bindsym 	$mod+Shift+Escape 	exec --no-startup-id setxkbmap -option caps:escape
+
+bindsym 	$mod+Return 		exec $term; workspace $ws1 
+bindsym 	$mod+Shift+Return 	exec $term -e tmux; workspace $ws1
+
+bindsym 	$mod+space		focus mode_toggle	
+bindsym 	$mod+Shift+space 	floating toggle		
+
+bindsym 	$mod+Tab		workspace back_and_forth
+bindsym 	$mod+Shift+Tab		exec --no-startup-id bash ~/.config/scripts/win_flashes.sh
+
+bindsym		$mod+Ctrl+z		exec $term -e htop; split horizontal;exec $term  -e cmatrix; split vertical; exec $term -e cfb; workspace $ws1
+
+#-----------------------------Others && FN---------------------------------------------#
+#bindsym 	F1			exec --no-startup-id echo "help" > /dev/null
+#bindsym 	$mod+F1
+
+#bindsym 	F2
+#bindsym 	$mod+F2
+
+#bindsym 	F3
+bindsym 	$mod+F3			exec arandr
+
+#bindsym 	F4
+bindsym 	$mod+F4			exec sudo systemctl suspend
+
+#bindsym 	F5
+bindsym 	$mod+F5			exec sudo systemctl restart NetworkManager
+
+#bindsym 	F6
+#bindsym 	$mod+F6
+
+#bindsym 	F7
+#bindsym 	$mod+F7
+
+#bindsym 	F8
+#bindsym 	$mod+F8
+
+#bindsym 	F9
+bindsym 	$mod+F9			exec --no-startup-id sudo bash ~/.config/i3/mount.sh
+
+#bindsym 	F10
+bindsym 	$mod+F10		exec --no-startup-id sudo bash ~/.config/i3/unmount.sh
+
+bindsym 	F11			fullscreen toggle
+#bindsym 	$mod+F11
+
+#bindsym 	F12
+#bindsym 	$mod+F12
+
+bindsym 	Print 			exec --no-startup-id scrot -u '%Y-%m-%d_$wx$h_scrot.png' -e 'mv $f ~/Pictures/shots/'
+bindsym 	Shift+Print 		exec --no-startup-id scrot -u
+bindsym 	$mod+Print 		exec --no-startup-id $screencast
+bindsym 	$mod+Shift+Print 	exec --no-startup-id killall ffmpeg
+
+bindsym 	XF86AudioRaiseVolume	exec --no-startup-id pamixer -i 5
+bindsym 	XF86AudioLowerVolume	exec --no-startup-id pamixer -d 5
+bindsym 	XF86AudioMute		exec --no-startup-id pamixer -t
+
+bindsym 	XF86AudioPlay		exec $poz
+bindsym 	XF86AudioPause		exec $poz
+bindsym 	XF86AudioNext		exec $next
+bindsym 	XF86AudioPrev		exec $prev
+bindsym 	XF86AudioStop		exec $pause
+bindsym 	XF86AudioRewind		exec $bakw
+bindsym 	XF86AudioForward	exec $forw		
+
+#bindsym 	XF86HomePage		exec --no-startup-id $browser --new-window kpodovzky.xyz
+#bindsym	$mod+XF86HomePage	exec --no-startup-id $browser
+#bindsym	$mod+Shift+XF86HomePage	exec --no-startup-id $browser
+
+#bindsym 	$mod+Scroll_Lock	exec --no-startup-id $
+#----------------------------------------------------------------------------------------------------------------------------------------------#
+
