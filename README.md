@@ -4,4 +4,7 @@ This contains the config files of the programs I mainly use on my GNU/Linux mach
 
 ## Programs:
 
-* i3: a tiling window manager for Linux
+* i3:    	a tiling window manager for Linux
+* Polybar:	customizable status bar used with i3 
+* Ranger: 	CLI file manager with VI key bindings
+
