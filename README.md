@@ -7,4 +7,5 @@ This contains the config/scripts files of the programs I mainly use on my GNU/Li
 * i3:    	a tiling window manager for Linux
 * Polybar:	customizable status bar used with i3 
 * Ranger: 	CLI file manager with VI key bindings
-
+* The Systetm doc contains bash scripts that keeps 
+Parabola up to date
