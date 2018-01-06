@@ -9,3 +9,4 @@ This contains the config/scripts files of the programs I mainly use on my GNU/Li
 * Ranger: 	CLI file manager with VI key bindings
 * The Systetm doc contains bash scripts that keeps 
 Parabola up to date
+* ncmpcpp is a mpd client: for playing music from the terminal!
