@@ -5,13 +5,13 @@ Parabola is a GNU/Linux-libre operating system.:
 * It's simple and lightweight. 
 
 
-This contains the config/scripts files of the programs I mainly use on my GNU/Linux machine. And they are universal, so you can use them on any GNU/Linux distros as long as you have the corresponding dependencies installed.
+This contains the config/scripts files of the programs I mainly use on my Parabola. And they are universal, so you can use them on any GNU/Linux distros as long as you have the corresponding dependencies installed.
 
 ## Programs:
 
-* i3:    	a tiling window manager for Linux
-* Polybar:	customizable status bar used with i3 
-* Ranger: 	CLI file manager with VI key bindings
+* [i3](https://i3wm.org/): a tiling window manager for Linux. 
+* [Polybar](https://github.com/jaagr/polybar):	customizable status bar used with i3.  
+* [Ranger](https://ranger.github.io/): 	CLI file manager with VI key bindings. 
 * The Systetm doc contains bash scripts that keeps 
 Parabola up to date
 * ncmpcpp is a mpd client: for playing music from the terminal!
