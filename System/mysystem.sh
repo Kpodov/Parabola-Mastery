@@ -1,6 +1,6 @@
 #!/bin/bash
 clear
-echo "This is information provided by mysystem.sh. 
+echo "This information is provided by mysystem.sh. 
 Program starts now."
 
 echo "Hello, $USER"
